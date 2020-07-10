@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
         })
 })
 //Update a project
-router.put('/:id', (req, res) => {
+router.put('/:id', validatePost, (req, res) => {
     const changes = req.body
     const {id} = req.params
 
@@ -50,6 +50,19 @@ router.delete("/:id", (req, res) => {
         .catch(err => {
             console.log(err)
             res.status(500).json({error: "Project could not be deleted"})
+        })
+})
+
+//get all actions for a project
+router.get('/:id', (req, res) => {
+
+    db.getProjectActions(req.params.id)
+        .then(actions => {
+            res.status(201).json(actions)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({error: "could not get actions"})
         })
 })
 
