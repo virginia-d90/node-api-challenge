@@ -5,7 +5,7 @@ const Project = require("../data/helpers/projectModel")
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', validatePost,  (req, res) => {
     const projectId = req.body.project_id
     const description = req.body.description
     const notes = req.body.notes
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validatePost, (req, res) => {
     const changes = req.body
     const {id} = req.params
 
@@ -54,4 +54,22 @@ router.delete("/:id", (req, res) => {
         })
 })
 
+//MIDDLEWARE
+
+function validatePost(req, res, next){
+    const body = req.body
+    const notes = req.body.notes
+    const description = req.body.description
+    const projectId = req.body.project_id
+
+    if(!body){
+        res.status(400).json({message: "missing action data"})
+    } else if (!notes || !description || !projectId){
+        res.status(400).json({message:"required field is missing"})
+    } else if (description.length > 128){
+        res.status(400).json({message:"description must be 128 characters or less"})
+    } else {
+        next()
+    }
+}
 module.exports = router;
