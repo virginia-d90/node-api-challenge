@@ -40,13 +40,24 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
-- [ ] Describe Middleware?
+We learned different ways to organize our api. Also learned how to check if client information is valid by writing custom middleware.
+
+- [ ] Describe Middleware?]
+
+Middleware functions are functions that have access to the request object ( req ), the response object ( res ), and the next function in the application's request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
+
 
 - [ ] Describe a Resource?
 
+A resource is an object with a type, and associated data. it has relationships with other resources and a set of methods used to operate it.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+a status code in the 200 range. 
+
 - [ ] How can we partition our application into sub-applications?
+
+Use routing to structure your work. Can be organized by "type", "feature/resource", or a hybrid
 
 ## Minimum Viable Product
 
